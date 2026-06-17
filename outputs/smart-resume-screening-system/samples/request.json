@@ -1,0 +1,17 @@
+{
+  "job_description": "We are hiring an AI/ML Developer with strong Python, FastAPI, SQL, Docker, machine learning, NLP, pandas, numpy, scikit-learn, and REST API experience.",
+  "resumes": [
+    {
+      "candidate_name": "Asha Sharma",
+      "text": "AI/ML Developer with 3 years of experience building Python applications. Skilled in FastAPI, SQL, Docker, machine learning, NLP, pandas, numpy, scikit-learn, REST API development, and pytest."
+    },
+    {
+      "candidate_name": "Rahul Mehta",
+      "text": "Backend developer with 2 years experience in Java, Spring Boot, MySQL, Docker, Git, REST API development, and microservices. Basic exposure to Python scripting."
+    },
+    {
+      "candidate_name": "Neha Verma",
+      "text": "Frontend developer with 4 years of experience in React, JavaScript, TypeScript, HTML, CSS, testing, agile delivery, and UI performance optimization."
+    }
+  ]
+}
