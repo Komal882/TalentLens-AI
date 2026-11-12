@@ -1,61 +1,22 @@
+
 import re
 from typing import List, Optional
 
 
 SKILL_KEYWORDS = {
-    "python",
-    "java",
-    "javascript",
-    "typescript",
-    "c++",
-    "c#",
-    "sql",
-    "mysql",
-    "postgresql",
-    "mongodb",
-    "redis",
-    "fastapi",
-    "flask",
-    "django",
-    "react",
-    "angular",
-    "node.js",
-    "node",
-    "html",
-    "css",
-    "docker",
-    "kubernetes",
-    "aws",
-    "azure",
-    "gcp",
-    "git",
-    "linux",
-    "machine learning",
-    "deep learning",
-    "nlp",
-    "computer vision",
-    "tensorflow",
-    "pytorch",
-    "scikit-learn",
-    "sklearn",
-    "pandas",
-    "numpy",
-    "matplotlib",
-    "seaborn",
-    "data analysis",
-    "data science",
-    "etl",
-    "airflow",
-    "spark",
-    "hadoop",
-    "rest api",
-    "api",
-    "microservices",
-    "ci/cd",
-    "jenkins",
-    "testing",
-    "pytest",
-    "agile",
+    "python", "java", "javascript", "typescript",
+    "c++", "c#", "sql", "mysql", "postgresql",
+    "mongodb", "redis", "fastapi", "flask", "django",
+    "react", "angular", "node.js", "node",
+    "html", "css", "docker", "kubernetes",
+    "aws", "azure", "gcp", "git", "linux",
+    "machine learning", "deep learning", "nlp",
+    "computer vision", "tensorflow", "pytorch",
+    "scikit-learn", "sklearn", "pandas", "numpy",
+    "matplotlib", "seaborn", "data analysis",
+    "data science", "etl", "airflow", "spark",
+    "hadoop", "rest api", "api", "microservices",
+    "ci/cd", "jenkins", "testing", "pytest", "agile",
 }
 
 
@@ -68,7 +29,17 @@ def extract_skills(text: str) -> List[str]:
     found_skills = set()
 
     for skill in SKILL_KEYWORDS:
-        pattern = r"(?<![a-z0-9+#.])" + re.escape(skill) + r"(?![a-z0-9+#.])"
+        if skill == "rest api":
+            pattern = r"(?<![a-z0-9+#.])rest\s+apis?(?![a-z0-9+#.])"
+        elif skill == "api":
+            pattern = r"(?<![a-z0-9+#.])apis?(?![a-z0-9+#.])"
+        else:
+            pattern = (
+                r"(?<![a-z0-9+#.])"
+                + re.escape(skill)
+                + r"(?![a-z0-9+#.])"
+            )
+
         if re.search(pattern, normalized_text):
             found_skills.add(skill)
 
@@ -80,11 +51,16 @@ def extract_skills(text: str) -> List[str]:
         found_skills.add("node.js")
         found_skills.discard("node")
 
+    # REST API is also a form of API development
+    if "rest api" in found_skills:
+        found_skills.add("api")
+
     return sorted(found_skills)
 
 
 def extract_experience_years(text: str) -> Optional[float]:
     normalized_text = normalize_text(text)
+
     patterns = [
         r"(\d+(?:\.\d+)?)\+?\s*(?:years|year|yrs|yr)\s+(?:of\s+)?(?:experience|exp)",
         r"(?:experience|exp)\s*(?:of\s*)?(\d+(?:\.\d+)?)\+?\s*(?:years|year|yrs|yr)",
@@ -92,8 +68,11 @@ def extract_experience_years(text: str) -> Optional[float]:
     ]
 
     matches = []
+
     for pattern in patterns:
-        matches.extend(float(value) for value in re.findall(pattern, normalized_text))
+        matches.extend(
+            float(value)
+            for value in re.findall(pattern, normalized_text)
+        )
 
     return max(matches) if matches else None
-

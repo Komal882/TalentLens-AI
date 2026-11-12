@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TalentLens AI | Resume Screening</title>
+  <link rel="stylesheet" href="/frontend/style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/">
+      <span class="brand-icon">✳</span>
+      <span>TalentLens <small>AI SCREENING</small></span>
+    </a>
+
+    <p class="nav-label">WORKSPACE</p>
+    <a class="nav-item active" href="#analyzer">▦ &nbsp; Resume Analyzer</a>
+    <a class="nav-item" href="#results">◈ &nbsp; Screening Results</a>
+
+    <div class="sidebar-bottom">
+      <span class="status-dot"></span> Local API connected
+      <p>Smart Resume Screening System</p>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">AI-POWERED RECRUITMENT</p>
+        <h1>Resume Intelligence</h1>
+      </div>
+      <span class="api-badge"><i></i> API ready</span>
+    </header>
+
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">CANDIDATE EVALUATION</p>
+        <h2>Find the right fit.</h2>
+        <p>Compare candidate skills against job requirements in seconds.</p>
+      </div>
+      <div class="welcome-icon">✧</div>
+    </section>
+
+    <section class="panel" id="analyzer">
+      <div class="section-heading">
+        <div>
+          <h3>Analyze a resume</h3>
+          <p>Provide the job details and upload a candidate's PDF.</p>
+        </div>
+        <span class="step-label">STEP 01 / ANALYSIS</span>
+      </div>
+
+      <form id="screeningForm">
+        <label for="candidateName">Candidate name</label>
+        <input id="candidateName" name="candidate_name"
+               type="text" value="Komal" required maxlength="100">
+
+        <label for="jobDescription">Job description <span>*</span></label>
+        <textarea id="jobDescription" name="job_description"
+          rows="6" minlength="20" required
+          placeholder="Paste the job description, required skills and responsibilities..."></textarea>
+        <div class="field-hint">Include required technologies and skills for better comparison.</div>
+
+        <label>Resume document <span>*</span></label>
+        <label class="upload-area" for="resumeFile">
+          <span class="upload-icon">↑</span>
+          <strong id="fileName">Choose a resume PDF</strong>
+          <small id="fileHint">Click to browse · PDF only · Maximum 5 MB</small>
+          <input id="resumeFile" name="resume_file" type="file"
+                 accept=".pdf,application/pdf" required>
+        </label>
+
+        <button type="submit" id="analyzeButton">
+          <span id="buttonText">Analyze Resume</span>
+          <span> → </span>
+        </button>
+        <p id="message" class="message" role="status"></p>
+      </form>
+    </section>
+
+    <section id="results" class="panel results-panel" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">SCREENING REPORT</p>
+          <h3>Candidate insights</h3>
+          <p id="resultSummary">Analysis completed.</p>
+        </div>
+        <span class="success-badge">✓ Complete</span>
+      </div>
+
+      <div class="metrics">
+        <div class="metric-card">
+          <span class="metric-label">RESUME MATCH</span>
+          <div class="metric-value" id="scoreValue">0%</div>
+          <div class="progress-track">
+            <div id="scoreBar" class="progress-fill"></div>
+          </div>
+          <small>Similarity and skill overlap</small>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">MATCHED SKILLS</span>
+          <div class="metric-value" id="matchedCount">0</div>
+          <small>Skills found in the resume</small>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">MISSING SKILLS</span>
+          <div class="metric-value" id="missingCount">0</div>
+          <small>Skills to review or improve</small>
+        </div>
+      </div>
+
+      <div class="skill-columns">
+        <div class="skill-section">
+          <h4>✓ Matched skills</h4>
+          <div id="matchedSkills" class="skill-list"></div>
+        </div>
+        <div class="skill-section">
+          <h4>↗ Missing skills</h4>
+          <div id="missingSkills" class="skill-list"></div>
+        </div>
+      </div>
+
+      <div class="explanation">
+        <h4>Screening explanation</h4>
+        <p id="explanation"></p>
+        <p class="experience">Experience detected: <strong id="experience">Not detected</strong></p>
+      </div>
+
+      <button type="button" class="secondary-button" id="resetButton">
+        Analyze another resume
+      </button>
+    </section>
+
+    <footer>TalentLens AI · Resume screening powered by Python & FastAPI</footer>
+  </main>
+
+  <script src="/frontend/script.js"></script>
+</body>
+</html>

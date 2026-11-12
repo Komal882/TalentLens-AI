@@ -132,3 +132,26 @@ Estimated completion time: 4-6 hours
 - Resume parsing and matching logic: 2 hours
 - Response formatting and explanation generation: 1 hour
 - README, sample request, and testing: 1-2 hours
+
+## Application Screenshots
+
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Resume Upload
+![Resume Upload](screenshots/upload.png)
+
+### Screening Results
+![Screening Results](screenshots/results.png)
+
+## Technologies Used
+
+- Python
+- FastAPI
+- HTML, CSS, JavaScript
+- TF-IDF
+- Cosine Similarity
+- NLP
+- PyPDF
+- Git and GitHub
+
